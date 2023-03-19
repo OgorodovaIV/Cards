@@ -19,8 +19,8 @@ public class Cards {
             if (comand.equals("exit")) {
                 break;
             } else if (comand.equals("start")) {
-                c = scanner.nextInt();
                 n = scanner.nextInt();
+                c = scanner.nextInt();
                 if (c * n > koloda.length) {
                     System.out.println("Ошибка: в колоде недостаточно карт для раздачи");
                 } else {
