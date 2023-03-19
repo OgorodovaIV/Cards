@@ -1,9 +1,6 @@
 import java.util.Scanner;
-
 public class Cards {
-
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
         String comand;
         String[] koloda = new String[] {
@@ -12,41 +9,35 @@ public class Cards {
             "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10",
             "W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8", "W9", "W10"
         };
-        String[] razdacha = new String[koloda.length];
+        String karta;
         String[] igroki = new String[0];
-        int c, n;
+        int c, n, k;
 
-        OUTER:
         while (true) {
             System.out.println("Введите команду (exit для выхода): ");
             comand = scanner.next();
             if (comand.equals("exit")) {
-                break OUTER;
+                break;
             } else if (comand.equals("start")) {
                 c = scanner.nextInt();
                 n = scanner.nextInt();
                 if (c * n > koloda.length) {
                     System.out.println("Ошибка: в колоде недостаточно карт для раздачи");
                 } else {
-                    // Перемешать колоду
+                    // Перемешаем как следует колоду
                     for (int i = 0; i < koloda.length; i++) {
-                        razdacha[i] = koloda[(int) (Math.random() * koloda.length)];
-                        // Проверим - не переносилась ли в раздачу уже эта карта?
-                        for (int j = 0; j < i; j++) {
-                            if (razdacha[j].equals(razdacha[i])) {
-                                // Да, карата уже переносилась, попытаемся выбрать другую карту
-                                i--;
-                                break;
-                            }
-                        }
+                        karta = koloda[i];
+                        k = (int) (Math.random() * koloda.length);
+                        koloda[i] = koloda[k];
+                        koloda[k] = karta;
                     }
-                    // Раздарим из перемешанной колоды
-                    int k = 0;
+                    // Раздадим из перемешанной колоды
+                    k = 0;
                     igroki = new String[c];
                     for (int i = 0; i < c; i++) {
                         igroki[i] = "";
                         for (int j = 1; j <= n; j++) {
-                            igroki[i] = igroki[i] + " " + razdacha[k++];
+                            igroki[i] = igroki[i] + " " + koloda[k++];
                         }
                     }
                 }
